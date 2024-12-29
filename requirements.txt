@@ -1,0 +1,11 @@
+pillow
+datasets
+diffusers==0.31.0
+einops
+imageio[ffmpeg]
+numpy
+pandas
+timm
+torch==2.5.0
+torchvision
+transformers
