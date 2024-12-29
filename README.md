@@ -26,7 +26,32 @@ The generation process of ACDiT, where pixels in each block are denoised simulta
 ACDiT is easy to implement, as simple as adding a Skip-Causal Attention Mask to the current DiT architecture during training, as shown in (a), where each noised block can only attend previous clean blocks and itself. During inference, ACDiT utilizes KV-Cache for efficient autoregressive inference.
 
 ## Implementation
-To implement the SCAM for both customization and efficiency, we use [FlexAttention](https://pytorch.org/blog/flexattention) provided by [Pytorch 2.5](https://pytorch.org/blog/pytorch2-5/). The training codes and model checkpoints will be released soon.
+To implement the SCAM for both customization and efficiency, we use [FlexAttention](https://pytorch.org/blog/flexattention) provided by [Pytorch 2.5](https://pytorch.org/blog/pytorch2-5/). The training codes will be released soon.
+
+## Model Zoo 🤗
+We provide the model weights for ACDiT-XL/H-img/vid through the download links below.
+| Model Name          | Image           |    Video  |
+|---------------------|-----------------|-----------|
+| **ACDiT-XL** | [ACDiT-XL-img](https://huggingface.co/JamesHujy/ACDiT/blob/main/ACDiT-XL-img.pt) |   [ACDiT-XL-vid](https://huggingface.co/JamesHujy/ACDiT/blob/main/ACDiT-XL-vid.pt)      |
+| **ACDiT-H**  | [ACDiT-H-img](https://huggingface.co/JamesHujy/ACDiT/blob/main/ACDiT-H-img.pt)  |   [ACDiT-H-vid](https://huggingface.co/JamesHujy/ACDiT/blob/main/ACDiT-H-vid.pt)       |
+
+## Setup
+To set up the runtime environment for this project, install the required dependencies using the provided requirements.txt file:
+```bash
+pip install -r requirements.txt
+```
+
+## Sampling
+After downloading the checkpoints, you can use the following scripts to generate image or videos:
+```bash
+python3 sample_img.py --ckpt ACDiT-H-img.pt
+```
+```bash
+python3 sample_vid.py --ckpt ACDiT-H-vid.pt
+```
+
+## Evaluation
+Following the evaluation protocal of [DiT](https://github.com/facebookresearch/DiT), we use [ADM's evaluation suite](https://github.com/openai/guided-diffusion/tree/main/evaluations) to compute FID, Inception Score and other metrics. 
 
 ## Acknowledgements
 This code is mainly built upon [DiT](https://github.com/facebookresearch/DiT) repository.
@@ -34,3 +59,14 @@ This code is mainly built upon [DiT](https://github.com/facebookresearch/DiT) re
 ## License
 
 This project is licensed under the MIT License.
+
+## Citation
+If our work assists your research, feel free to give us a star ⭐ or cite us using:
+```bibtex
+@article{ACDiT,
+  title={ACDiT: Interpolating Autoregressive Conditional Modeling and Diffusion Transformer},
+  author={Hu, Jinyi and Hu, Shengding and Song, Yuxuan and Huang, Yufei and Wang, Mingxuan and Zhou, Hao and Liu, Zhiyuan and Ma, Wei-Ying and Sun, Maosong},
+  journal={arXiv preprint arXiv:2412.07720},
+  year={2024}
+}
+```
